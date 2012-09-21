@@ -30,11 +30,13 @@ case class LongColumn() extends ArgColumn[Long] {
 }
 
 case class FloatColumn(precision: Int) extends ArgColumn[Float] {
-  def apply(float: Float): String = "%s%d%s".format("%1.", precision, "f").format(float)
+  def apply(float: Float): String =
+    "%s%d%s".format("%.", precision, "e").format(float).padTo(precision + 7, ' ')
 }
 
 case class DoubleColumn(precision: Int) extends ArgColumn[Double] {
-  def apply(float: Double): String = "%s%d%s".format("%1.", precision, "f").format(float)
+  def apply(float: Double): String =
+    "%s%d%s".format("%.", precision, "e").format(float).padTo(precision + 8, ' ')
 }
 
 case class BooleanColumn() extends ArgColumn[Boolean] {
